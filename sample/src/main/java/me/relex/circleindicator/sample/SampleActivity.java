@@ -1,21 +1,23 @@
 package me.relex.circleindicator.sample;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import me.relex.circleindicator.sample.fragment.ChangeColorFragment;
 import me.relex.circleindicator.sample.fragment.CustomAnimationFragment;
 import me.relex.circleindicator.sample.fragment.DefaultFragment;
@@ -26,7 +28,8 @@ import me.relex.circleindicator.sample.fragment.SnackbarBehaviorFragment;
 
 public class SampleActivity extends AppCompatActivity {
 
-    @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_sample);
@@ -40,7 +43,8 @@ public class SampleActivity extends AppCompatActivity {
 
         getSupportFragmentManager().addOnBackStackChangedListener(
                 new FragmentManager.OnBackStackChangedListener() {
-                    @Override public void onBackStackChanged() {
+                    @Override
+                    public void onBackStackChanged() {
                         int count = getSupportFragmentManager().getBackStackEntryCount();
                         ActionBar actionbar = getSupportActionBar();
                         if (actionbar != null) {
@@ -55,7 +59,8 @@ public class SampleActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
                 onBackPressed();
             }
         });
@@ -63,13 +68,15 @@ public class SampleActivity extends AppCompatActivity {
 
     public static class SampleListFragment extends Fragment {
 
-        @Nullable @Override
+        @Nullable
+        @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                @Nullable Bundle savedInstanceState) {
+                                 @Nullable Bundle savedInstanceState) {
             return new RecyclerView(getContext());
         }
 
-        @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        @Override
+        public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             SampleListAdapter adapter = new SampleListAdapter();
 
             RecyclerView recyclerView = (RecyclerView) view;
@@ -91,21 +98,25 @@ public class SampleActivity extends AppCompatActivity {
 
             private final List<SampleInfo> mList = new ArrayList<>();
 
-            @Override public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            @Override
+            public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 return ItemViewHolder.create(parent);
             }
 
-            @Override public void onBindViewHolder(final ItemViewHolder holder, int position) {
+            @Override
+            public void onBindViewHolder(final ItemViewHolder holder, int position) {
                 SampleInfo sample = mList.get(position);
                 holder.bindView(sample.title);
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override public void onClick(View v) {
+                    @Override
+                    public void onClick(View v) {
                         navigateToFragment(mList.get(holder.getAdapterPosition()).fragmentName);
                     }
                 });
             }
 
-            @Override public int getItemCount() {
+            @Override
+            public int getItemCount() {
                 return mList.size();
             }
 

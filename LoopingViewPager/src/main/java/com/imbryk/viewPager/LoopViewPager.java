@@ -16,11 +16,13 @@
 package com.imbryk.viewPager;
 
 import android.content.Context;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 public class LoopViewPager extends ViewPager {
     private static final boolean DEFAULT_BOUNDARY_CASHING = false;
@@ -34,7 +36,7 @@ public class LoopViewPager extends ViewPager {
     /**
      * helper function which may be used when implementing FragmentPagerAdapter
      *
-     * @return (position-1)%count
+     * @return (position - 1)%count
      */
     public static int toRealPosition(int position, int count) {
         position = position - 1;
@@ -64,7 +66,8 @@ public class LoopViewPager extends ViewPager {
         }
     }
 
-    @Override public void setAdapter(PagerAdapter adapter) {
+    @Override
+    public void setAdapter(PagerAdapter adapter) {
         mAdapter = new LoopPagerAdapterWrapper(adapter);
         mAdapter.setBoundaryCaching(mBoundaryCaching);
         mAdapter.setBoundaryLooping(mBoundaryLooping);
@@ -72,11 +75,13 @@ public class LoopViewPager extends ViewPager {
         setCurrentItem(0, false);
     }
 
-    @Override public PagerAdapter getAdapter() {
+    @Override
+    public PagerAdapter getAdapter() {
         return mAdapter != null ? mAdapter.getRealAdapter() : mAdapter;
     }
 
-    @Override public int getCurrentItem() {
+    @Override
+    public int getCurrentItem() {
         return mAdapter != null ? mAdapter.toRealPosition(super.getCurrentItem()) : 0;
     }
 
@@ -85,30 +90,35 @@ public class LoopViewPager extends ViewPager {
         super.setCurrentItem(realItem, smoothScroll);
     }
 
-    @Override public void setCurrentItem(int item) {
+    @Override
+    public void setCurrentItem(int item) {
         if (getCurrentItem() != item) {
             setCurrentItem(item, true);
         }
     }
 
-    @Override public void setOnPageChangeListener(OnPageChangeListener listener) {
+    @Override
+    public void setOnPageChangeListener(OnPageChangeListener listener) {
         addOnPageChangeListener(listener);
     }
 
-    @Override public void addOnPageChangeListener(OnPageChangeListener listener) {
+    @Override
+    public void addOnPageChangeListener(OnPageChangeListener listener) {
         if (mOnPageChangeListeners == null) {
             mOnPageChangeListeners = new ArrayList<>();
         }
         mOnPageChangeListeners.add(listener);
     }
 
-    @Override public void removeOnPageChangeListener(OnPageChangeListener listener) {
+    @Override
+    public void removeOnPageChangeListener(OnPageChangeListener listener) {
         if (mOnPageChangeListeners != null) {
             mOnPageChangeListeners.remove(listener);
         }
     }
 
-    @Override public void clearOnPageChangeListeners() {
+    @Override
+    public void clearOnPageChangeListeners() {
         if (mOnPageChangeListeners != null) {
             mOnPageChangeListeners.clear();
         }
@@ -135,7 +145,8 @@ public class LoopViewPager extends ViewPager {
         private float mPreviousOffset = -1;
         private float mPreviousPosition = -1;
 
-        @Override public void onPageSelected(int position) {
+        @Override
+        public void onPageSelected(int position) {
 
             int realPosition = mAdapter.toRealPosition(position);
             if (mPreviousPosition != realPosition) {
@@ -185,7 +196,8 @@ public class LoopViewPager extends ViewPager {
             }
         }
 
-        @Override public void onPageScrollStateChanged(int state) {
+        @Override
+        public void onPageScrollStateChanged(int state) {
             if (mAdapter != null) {
                 int position = LoopViewPager.super.getCurrentItem();
                 int realPosition = mAdapter.toRealPosition(position);

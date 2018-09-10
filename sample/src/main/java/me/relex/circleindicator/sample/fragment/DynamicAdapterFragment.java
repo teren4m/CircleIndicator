@@ -1,12 +1,13 @@
 package me.relex.circleindicator.sample.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 import me.relex.circleindicator.CircleIndicator;
 import me.relex.circleindicator.sample.R;
 import me.relex.circleindicator.sample.SamplePagerAdapter;
@@ -15,19 +16,22 @@ public class DynamicAdapterFragment extends Fragment implements View.OnClickList
 
     private SamplePagerAdapter mAdapter;
 
-    @Nullable @Override
+    @Nullable
+    @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_sample_dynamic_adapter, container, false);
     }
 
-    @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
         view.findViewById(R.id.add).setOnClickListener(this);
         view.findViewById(R.id.remove).setOnClickListener(this);
 
         mAdapter = new SamplePagerAdapter(1) {
-            @Override public int getItemPosition(Object object) {
+            @Override
+            public int getItemPosition(Object object) {
                 return POSITION_NONE;
             }
         };
@@ -39,7 +43,8 @@ public class DynamicAdapterFragment extends Fragment implements View.OnClickList
         mAdapter.registerDataSetObserver(indicator.getDataSetObserver());
     }
 
-    @Override public void onClick(View v) {
+    @Override
+    public void onClick(View v) {
         switch (v.getId()) {
             case R.id.add:
                 mAdapter.addItem();

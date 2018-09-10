@@ -25,9 +25,9 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:design:24.2.1'
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.android.support:recyclerview-v7:24.2.1'
-    compile project(':circleindicator')
-    compile project(':LoopingViewPager')
+    implementation 'com.google.android.material:material:1.0.0-rc01'
+    implementation "androidx.appcompat:appcompat:1.0.0-rc02"
+    implementation group: 'androidx.recyclerview', name: 'recyclerview', version: '1.0.0-rc02'
+    implementation project(':circleindicator')
+    implementation project(':LoopingViewPager')
 }
