@@ -17,7 +17,7 @@ dependencies {
 Usage
 --------
 ```xml
-	<me.relex.circleindicator.CircleIndicator
+	<com.github.teren4m.circleindicator.CircleIndicator
 		android:id="@+id/indicator"
         android:layout_width="match_parent"
         android:layout_height="48dp"/>

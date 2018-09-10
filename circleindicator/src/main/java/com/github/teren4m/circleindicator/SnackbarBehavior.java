@@ -1,4 +1,4 @@
-package me.relex.circleindicator;
+package com.github.teren4m.circleindicator;
 
 import android.content.Context;
 import android.util.AttributeSet;
